@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Anniversary</title>
+  <!-- Google Fonts: Elegant Calligraphy & Serif -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle, #2a0833 0%, #0f0214 100%);
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 15px;
+      overflow-x: hidden;
+    }
+
+    /* CARD CONTAINER - Clean 9:16 Frame */
+    .card-wrapper {
+      width: 100%;
+      max-width: 390px;
+      aspect-ratio: 9/16;
+      background: #F3F0E9;
+      color: #111111;
+      border-radius: 20px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
+      padding: 25px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* Vintage Corner Ornaments */
+    .corner-tl {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      width: 48px;
+      height: 48px;
+      pointer-events: none;
+    }
+
+    .corner-br {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      width: 48px;
+      height: 48px;
+      transform: rotate(180deg);
+      pointer-events: none;
+    }
+
+    /* Floral Line Art */
+    .floral-tr {
+      position: absolute;
+      top: 25px;
+      right: 15px;
+      width: 120px;
+      pointer-events: none;
+      opacity: 0.85;
+    }
+
+    .floral-bl {
+      position: absolute;
+      bottom: 25px;
+      left: -10px;
+      width: 140px;
+      pointer-events: none;
+      opacity: 0.85;
+    }
+
+    .hearts-art {
+      position: absolute;
+      left: 18px;
+      top: 55%;
+      width: 42px;
+      pointer-events: none;
+    }
+
+    /* PHOTO FRAME AREA */
+    .frame-container {
+      position: relative;
+      width: 80%;
+      margin: 35px auto 0 auto;
+    }
+
+    /* Black offset border behind frame */
+    .frame-bg-border {
+      position: absolute;
+      inset: -6px;
+      border: 2.5px solid #1a1a1a;
+      transform: rotate(-3.5deg);
+      pointer-events: none;
+      border-radius: 4px;
+    }
+
+    /* Photo Box */
+    .photo-box {
+      width: 100%;
+      aspect-ratio: 1/1;
+      background: #c2b19c;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .photo-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Red Roses Floral Accent Overlay */
+    .roses-top-left {
+      position: absolute;
+      top: -25px;
+      left: -35px;
+      width: 105px;
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    .roses-bottom-right {
+      position: absolute;
+      bottom: -35px;
+      right: -30px;
+      width: 110px;
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    /* CARD TEXT SECTION */
+    .text-section {
+      text-align: center;
+      margin-bottom: 20px;
+      z-index: 2;
+    }
+
+    .happy-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #222222;
+      font-weight: 700;
+      margin-bottom: -8px;
+    }
+
+    .anniversary-title {
+      font-family: 'Alex Brush', cursive;
+      font-size: 56px;
+      color: #111111;
+      line-height: 1.05;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+
+    .couple-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 19px;
+      font-weight: 700;
+      color: #444444;
+      margin-top: 4px;
+      letter-spacing: 1px;
+    }
+
+    .custom-message {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 14px;
+      color: #666666;
+      margin-top: 6px;
+      padding: 0 15px;
+      line-height: 1.3;
+    }
+
+    /* Loading Overlay */
+    .card-loader {
+      position: absolute;
+      inset: 0;
+      background: rgba(243, 240, 233, 0.95);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 20;
+      transition: opacity 0.4s ease;
+    }
+
+    .spinner {
+      width: 36px;
+      height: 36px;
+      border: 3px solid rgba(0,0,0,0.1);
+      border-top-color: #800e2e;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-bottom: 10px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- CARD TEMPLATE CANVAS -->
+  <div class="card-wrapper" id="anniversaryCard">
+
+    <!-- Loading overlay while fetching details -->
+    <div class="card-loader" id="loader">
+      <div class="spinner"></div>
+      <span style="font-size:12px; color:#555; font-weight:600;">Loading Surprise...</span>
+    </div>
+
+    <!-- Top Left Corner Ornament -->
+    <svg class="corner-tl" viewBox="0 0 100 100">
+      <path d="M10 10 H90 V15 H15 V90 H10 Z" fill="#1a1a1a"/>
+      <circle cx="20" cy="20" r="4" fill="#1a1a1a"/>
+      <path d="M20 20 C 30 50, 50 30, 70 20" stroke="#1a1a1a" stroke-width="2" fill="none"/>
+    </svg>
+
+    <!-- Bottom Right Corner Ornament -->
+    <svg class="corner-br" viewBox="0 0 100 100">
+      <path d="M10 10 H90 V15 H15 V90 H10 Z" fill="#1a1a1a"/>
+      <circle cx="20" cy="20" r="4" fill="#1a1a1a"/>
+      <path d="M20 20 C 30 50, 50 30, 70 20" stroke="#1a1a1a" stroke-width="2" fill="none"/>
+    </svg>
+
+    <!-- Top Right Line Art -->
+    <svg class="floral-tr" viewBox="0 0 120 80" fill="none" stroke="#1a1a1a" stroke-width="1.2">
+      <path d="M10,70 Q60,10 110,30" />
+      <path d="M40,40 C30,20 20,25 30,10 C40,5 50,20 40,40 Z" />
+      <path d="M70,25 C60,10 50,15 60,0 C70,-5 80,10 70,25 Z" />
+      <circle cx="105" cy="30" r="3" fill="#1a1a1a"/>
+    </svg>
+
+    <!-- Bottom Left Line Art -->
+    <svg class="floral-bl" viewBox="0 0 120 80" fill="none" stroke="#1a1a1a" stroke-width="1.2">
+      <path d="M10,20 Q60,70 110,50" />
+      <path d="M50,45 C40,65 30,60 40,75 C50,80 60,65 50,45 Z" />
+      <circle cx="15" cy="20" r="3" fill="#1a1a1a"/>
+    </svg>
+
+    <!-- Line Art Hearts -->
+    <svg class="hearts-art" viewBox="0 0 50 60" fill="none" stroke="#1a1a1a" stroke-width="1.5">
+      <path d="M12,20 C8,10 0,15 5,25 L15,35 L25,25 C30,15 22,10 18,20 Z" />
+      <path d="M30,35 C27,28 20,30 23,38 L30,45 L37,38 C40,30 33,28 30,35 Z" />
+    </svg>
+
+    <!-- PHOTO FRAME AREA -->
+    <div class="frame-container">
+      <div class="frame-bg-border"></div>
+
+      <!-- Top-Left Roses Graphic -->
+      <svg class="roses-top-left" viewBox="0 0 100 100">
+        <g transform="translate(10,10)">
+          <path d="M10 40 Q25 10 50 30 Q25 50 10 40Z" fill="#5a7052"/>
+          <path d="M5 50 Q20 20 40 45 Q20 60 5 50Z" fill="#3d4f37"/>
+          <circle cx="45" cy="45" r="22" fill="#800e2e"/>
+          <circle cx="45" cy="45" r="16" fill="#a4133c"/>
+          <circle cx="45" cy="45" r="10" fill="#c9184a"/>
+          <path d="M38 42 Q45 35 52 42 Q45 50 38 42Z" fill="#ff4d6d"/>
+          <circle cx="68" cy="30" r="15" fill="#a4133c"/>
+          <circle cx="68" cy="30" r="10" fill="#c9184a"/>
+        </g>
+      </svg>
+
+      <!-- Photo Display Box -->
+      <div class="photo-box">
+        <img id="couplePhoto" src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=600" alt="Couple Photo">
+      </div>
+
+      <!-- Bottom-Right Roses Graphic -->
+      <svg class="roses-bottom-right" viewBox="0 0 100 100">
+        <g transform="translate(10,10)">
+          <path d="M30 10 Q60 25 40 50 Q10 25 30 10Z" fill="#5a7052"/>
+          <circle cx="35" cy="45" r="24" fill="#800e2e"/>
+          <circle cx="35" cy="45" r="17" fill="#a4133c"/>
+          <circle cx="35" cy="45" r="11" fill="#c9184a"/>
+          <path d="M28 42 Q35 35 42 42 Q35 50 28 42Z" fill="#ff4d6d"/>
+          <circle cx="60" cy="55" r="14" fill="#c9184a"/>
+        </g>
+      </svg>
+    </div>
+
+    <!-- TEXT BOTTOM -->
+    <div class="text-section">
+      <div class="happy-title">Happy</div>
+      <div class="anniversary-title">Anniversary</div>
+      <div class="couple-name" id="coupleName">Rahul & Priya</div>
+      <div class="custom-message" id="customMessage"></div>
+    </div>
+
+  </div>
+
+  <!-- Firebase Integration Script -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCRAO7UDddkFKvKbGGBBtkruD22NZnNozU",
+      authDomain: "soravtemps-d5419.firebaseapp.com",
+      projectId: "soravtemps-d5419",
+      storageBucket: "soravtemps-d5419.firebasestorage.app",
+      messagingSenderId: "889624784593",
+      appId: "1:889624784593:web:3a325467962639facedff0"
+    };
+
+    const firebaseApp = initializeApp(firebaseConfig);
+    const db = getFirestore(firebaseApp);
+
+    function hideLoader() {
+      const loader = document.getElementById('loader');
+      if (loader) {
+        loader.style.opacity = '0';
+        setTimeout(() => loader.style.display = 'none', 400);
+      }
+    }
+
+    function populateCard(data) {
+      const name = (data.name || '').trim();
+      const message = (data.message || '').trim();
+      const photos = Array.isArray(data.photoUrls) ? data.photoUrls.filter(Boolean) : [];
+
+      if (name) {
+        document.getElementById('coupleName').textContent = name;
+      }
+      if (message) {
+        document.getElementById('customMessage').textContent = `"${message}"`;
+      }
+      if (photos.length > 0) {
+        document.getElementById('couplePhoto').src = photos[0];
+      }
+
+      hideLoader();
+    }
+
+    async function initCard() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const cardId = urlParams.get('id');
+
+      // Direct URL query param fallbacks
+      const directName = urlParams.get('name');
+      const directPhoto = urlParams.get('photo');
+      const directMsg = urlParams.get('message');
+
+      if (cardId) {
+        try {
+          const snap = await getDoc(doc(db, 'cards', cardId));
+          if (snap.exists()) {
+            populateCard(snap.data());
+            return;
+          }
+        } catch (err) {
+          console.error("Firestore fetch error:", err);
+        }
+      }
+
+      // Fallback if URL contains direct params or default demo
+      if (directName || directPhoto || directMsg) {
+        populateCard({
+          name: directName,
+          photoUrls: directPhoto ? [directPhoto] : [],
+          message: directMsg
+        });
+      } else {
+        // Default demo state
+        hideLoader();
+      }
+    }
+
+    initCard();
+  </script>
+</body>
+</html>
